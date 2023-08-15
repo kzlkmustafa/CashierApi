@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace CoreLayer.DataAccess.EntityFramework
 {
-    internal class EfEntityRepositoryBase<Tentity, TContext> : IEntityRepository<Tentity>
+    public class EfEntityRepositoryBase<Tentity, TContext> : IEntityRepository<Tentity>
         where Tentity : class, IEntity, new()
         where TContext : DbContext, new()
     {
