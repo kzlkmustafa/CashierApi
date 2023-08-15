@@ -9,7 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IGenericService<T>
     {
-         Task<IDataResult<T>> GetById(int id); 
+        Task<IDataResult<T>> GetById(int id);
         Task<IDataResult<IEnumerable<T>>> GetList();
         Task<IResult> Add(T entity);
         Task<IResult> Update(T entity);
