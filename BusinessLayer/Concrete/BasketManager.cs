@@ -25,6 +25,7 @@ namespace BusinessLayer.Concrete
         {
             try
             {
+                entity.CreatedDate = DateTime.Now;
                 await _basketdal.AddAsync(entity);
                 return new Result(true, Messages.Succesfully);
 
@@ -80,11 +81,11 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public async Task<IDataResult<IEnumerable<Basket>>> GetListByCashier(int cashierId)
+        public async Task<IDataResult<IEnumerable<Basket>>> GetListByCashier(int appuserid)
         {
             try
             {
-                IEnumerable<Basket> baskets = (await _basketdal.GetAllAsync(x => x.CashierId == cashierId)).ToList();
+                IEnumerable<Basket> baskets = (await _basketdal.GetAllAsync(x => x.AppUserId == appuserid)).ToList();
                 return new DataResult<IEnumerable<Basket>>(baskets, true, Messages.Succesfully);
 
             }

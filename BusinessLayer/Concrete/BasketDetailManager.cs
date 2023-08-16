@@ -26,6 +26,7 @@ namespace BusinessLayer.Concrete
         {
             try
             {
+                entity.CreateDate =DateTime.Now;
                 await _basketdetaildal.AddAsync(entity);
                 return new Result(true, Messages.Succesfully);
 
