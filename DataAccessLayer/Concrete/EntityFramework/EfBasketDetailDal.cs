@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete.EntityFramework
 {
-    internal class EfBasketDetailDal : EfEntityRepositoryBase<BasketDetail,CashierContext> , IBasketDetailDal
+    public class EfBasketDetailDal : EfEntityRepositoryBase<BasketDetail,CashierContext> , IBasketDetailDal
     {
     }
 }
