@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using CoreLayer.Utilities.Results.Abstract;
+using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IProductService : IGenericService<Product>
     {
-        Task<IEnumerable<Product>> GetListByKdv(int kdvId);
-        Task<IEnumerable<Product>> GetListByCategoryId(int categoryId);
+        Task<IDataResult<IEnumerable<Product>>> GetListByKdv(int kdvId);
+        Task<IDataResult<IEnumerable<Product>>> GetListByCategoryId(int categoryId);
     }
 }

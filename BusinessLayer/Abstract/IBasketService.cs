@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using CoreLayer.Utilities.Results.Abstract;
+using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IBasketService : IGenericService<Basket>
     {
-        Task<IEnumerable<Basket>> GetListByCashier(int cashierId);
+        Task<IDataResult<IEnumerable<Basket>>> GetListByCashier(int cashierId);
     }
 }
+    

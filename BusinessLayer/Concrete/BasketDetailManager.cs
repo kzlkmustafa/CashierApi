@@ -15,7 +15,7 @@ namespace BusinessLayer.Concrete
 {
     public class BasketDetailManager : IBasketDetailService
     {
-        private IBasketDetailDal _basketdetaildal;
+        readonly private IBasketDetailDal _basketdetaildal;
 
         public BasketDetailManager(IBasketDetailDal basketdetaildal)
         {
@@ -54,7 +54,7 @@ namespace BusinessLayer.Concrete
             try
             {
                 BasketDetail mybasketdetail = await _basketdetaildal.GetByIdAsync(x => x.BasketDetailId == id);
-                return new DataResult<BasketDetail>(mybasketdetail, true);
+                return new DataResult<BasketDetail>(mybasketdetail, true,Messages.Succesfully);
 
             }catch(Exception ex)
             {
@@ -68,7 +68,7 @@ namespace BusinessLayer.Concrete
             try
             {
                 IEnumerable<BasketDetail> basketDetails = (await _basketdetaildal.GetAllAsync()).ToList();
-                return new DataResult<IEnumerable<BasketDetail>>(basketDetails, true);
+                return new DataResult<IEnumerable<BasketDetail>>(basketDetails, true, Messages.Succesfully);
 
             }
             catch(Exception ex)
@@ -83,7 +83,7 @@ namespace BusinessLayer.Concrete
             try
             {
                 IEnumerable<BasketDetail> basketDetails = (await _basketdetaildal.GetAllAsync(x => x.BasketId == basketId)).ToList();
-                return new DataResult<IEnumerable<BasketDetail>>(basketDetails,true);
+                return new DataResult<IEnumerable<BasketDetail>>(basketDetails,true, Messages.Succesfully);
 
             }
             catch(Exception ex)
@@ -98,7 +98,7 @@ namespace BusinessLayer.Concrete
             try
             {
                 IEnumerable<BasketDetail> basketDetails = (await _basketdetaildal.GetAllAsync(x => x.ProductId == productId)).ToList();
-                return new DataResult<IEnumerable<BasketDetail>>(basketDetails, true);
+                return new DataResult<IEnumerable<BasketDetail>>(basketDetails, true, Messages.Succesfully);
 
             }
             catch (Exception ex)
