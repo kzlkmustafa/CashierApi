@@ -1,9 +1,12 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using BusinessLayer.Constant;
+using CoreLayer.Entities;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +18,21 @@ namespace BusinessLayer.Concrete
     public class BasketManager : IBasketService
     {
         readonly private IBasketDal _basketdal;
+        readonly private IMapper _mapper;
 
-        public BasketManager(IBasketDal basketdal)
+        public BasketManager(IBasketDal basketdal, IMapper mapper)
         {
             _basketdal = basketdal;
+            _mapper = mapper;
         }
 
-        public async Task<IResult> Add(Basket entity)
+        public async Task<IResult> Add(BasketAddDto entity)
         {
+            var result = _mapper.Map<Basket>(entity);
             try
             {
-                entity.CreatedDate = DateTime.Now;
-                await _basketdal.AddAsync(entity);
+                result.CreatedDate = DateTime.Now;
+                await _basketdal.AddAsync(result);
                 return new Result(true, Messages.Succesfully);
 
             }
@@ -50,57 +56,12 @@ namespace BusinessLayer.Concrete
 
             }
         }
-
-        public async Task<IDataResult<Basket>> GetById(int id)
+        public async Task<IResult> Update(BasketDto entity)
         {
+            var result = _mapper.Map<Basket>(entity);
             try
             {
-                Basket basket = await _basketdal.GetByIdAsync(x => x.BasketId == id);
-                return new DataResult<Basket>(basket, true, Messages.Succesfully);
-
-            }
-            catch (Exception ex)
-            {
-                return new DataResult<Basket>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IDataResult<IEnumerable<Basket>>> GetList()
-        {
-            try
-            {
-                IEnumerable<Basket> baskets = (await _basketdal.GetAllAsync()).ToList();
-                return new DataResult<IEnumerable<Basket>>(baskets, true, Messages.Succesfully);
-
-            }
-            catch (Exception ex)
-            {
-                return new DataResult<IEnumerable<Basket>>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IDataResult<IEnumerable<Basket>>> GetListByCashier(int appuserid)
-        {
-            try
-            {
-                IEnumerable<Basket> baskets = (await _basketdal.GetAllAsync(x => x.AppUserId == appuserid)).ToList();
-                return new DataResult<IEnumerable<Basket>>(baskets, true, Messages.Succesfully);
-
-            }
-            catch (Exception ex)
-            {
-                return new DataResult<IEnumerable<Basket>>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IResult> Update(Basket entity)
-        {
-            try
-            {
-                await _basketdal.UpdateAsync(entity);
+                await _basketdal.UpdateAsync(result);
                 return new Result(true, Messages.Succesfully);
 
             }
@@ -110,5 +71,58 @@ namespace BusinessLayer.Concrete
 
             }
         }
+
+        public async Task<IDataResult<BasketDto>> GetById(int id)
+        {
+            try
+            {
+                Basket basket = await _basketdal.GetByIdAsync(x => x.BasketId == id);
+                var result = _mapper.Map<BasketDto>(basket);
+
+                return new DataResult<BasketDto>(result, true, Messages.Succesfully);
+
+            }
+            catch (Exception ex)
+            {
+                return new DataResult<BasketDto>(null, false, ex.Message);
+
+            }
+        }
+
+        public async Task<IDataResult<IEnumerable<BasketDto>>> GetList()
+        {
+            try
+            {
+                IEnumerable<Basket> entities = (await _basketdal.GetAllAsync()).ToList();
+                var result = _mapper.Map<IEnumerable<Basket>, IEnumerable<BasketDto>>(entities);
+
+                return new DataResult<IEnumerable<BasketDto>>(result, true, Messages.Succesfully);
+
+            }
+            catch (Exception ex)
+            {
+                return new DataResult<IEnumerable<BasketDto>>(null, false, ex.Message);
+
+            }
+        }
+
+        public async Task<IDataResult<IEnumerable<BasketDto>>> GetListByCashier(int appuserid)
+        {
+            try
+            {
+                IEnumerable<Basket> entities = (await _basketdal.GetAllAsync(x => x.AppUserId == appuserid)).ToList();
+                var result = _mapper.Map<IEnumerable<Basket>, IEnumerable<BasketDto>>(entities);
+
+                return new DataResult<IEnumerable<BasketDto>>(result, true, Messages.Succesfully);
+
+            }
+            catch (Exception ex)
+            {
+                return new DataResult<IEnumerable<BasketDto>>(null, false, ex.Message);
+
+            }
+        }
+
+        
     }
 }

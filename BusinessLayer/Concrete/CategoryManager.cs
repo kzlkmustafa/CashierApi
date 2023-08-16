@@ -1,9 +1,12 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using BusinessLayer.Constant;
+using CoreLayer.Entities;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +18,20 @@ namespace BusinessLayer.Concrete
     public class CategoryManager : ICategoryService
     {
         readonly private ICategoryDal _categorydal;
+        readonly private IMapper _mapper;
 
-        public CategoryManager(ICategoryDal categorydal)
+        public CategoryManager(ICategoryDal categorydal, IMapper mapper)
         {
             _categorydal = categorydal;
+            _mapper = mapper;
         }
 
-        public async Task<IResult> Add(Category entity)
+        public async Task<IResult> Add(CategoryAddDto entity)
         {
+            var result = _mapper.Map<Category>(entity);
             try
             {
-                await _categorydal.AddAsync(entity);
+                await _categorydal.AddAsync(result);
                 return new Result(true, Messages.Succesfully);
 
             }
@@ -49,41 +55,12 @@ namespace BusinessLayer.Concrete
 
             }
         }
-
-        public async Task<IDataResult<Category>> GetById(int id)
+        public async Task<IResult> Update(CategoryDto entity)
         {
+            var result = _mapper.Map<Category>(entity);
             try
             {
-                Category category = await _categorydal.GetByIdAsync(x => x.CategoryId == id);
-                return new DataResult<Category>(category, true,Messages.Succesfully);
-
-            }
-            catch (Exception ex)
-            {
-                return new DataResult<Category>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IDataResult<IEnumerable<Category>>> GetList()
-        {
-            try
-            {
-                IEnumerable<Category> categories = (await _categorydal.GetAllAsync()).ToList();
-                return new DataResult<IEnumerable<Category>>(categories, true,Messages.Succesfully);
-
-            }catch(Exception ex)
-            {
-                return new DataResult<IEnumerable<Category>>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IResult> Update(Category entity)
-        {
-            try
-            {
-                await _categorydal.UpdateAsync(entity);
+                await _categorydal.UpdateAsync(result);
                 return new Result(true, Messages.Succesfully);
 
             }
@@ -93,5 +70,39 @@ namespace BusinessLayer.Concrete
 
             }
         }
+
+        public async Task<IDataResult<CategoryDto>> GetById(int id)
+        {
+            try
+            {
+                Category entity = await _categorydal.GetByIdAsync(x => x.CategoryId == id);
+                var result = _mapper.Map<CategoryDto>(entity);
+                return new DataResult<CategoryDto>(result, true,Messages.Succesfully);
+
+            }
+            catch (Exception ex)
+            {
+                return new DataResult<CategoryDto>(null, false, ex.Message);
+
+            }
+        }
+
+        public async Task<IDataResult<IEnumerable<CategoryDto>>> GetList()
+        {
+            try
+            {
+                IEnumerable<Category> entities = (await _categorydal.GetAllAsync()).ToList();
+                var result = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(entities);
+
+                return new DataResult<IEnumerable<CategoryDto>>(result, true,Messages.Succesfully);
+
+            }catch(Exception ex)
+            {
+                return new DataResult<IEnumerable<CategoryDto>>(null, false, ex.Message);
+
+            }
+        }
+
+        
     }
 }

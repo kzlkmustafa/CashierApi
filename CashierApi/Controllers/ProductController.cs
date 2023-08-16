@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -18,7 +19,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddProduct(Product product)
+        public async Task<IActionResult> AddProduct(ProductAddDto product)
         {
             var Addresult = await _productService.Add(product);
             if (Addresult.IsSuccess)
@@ -39,7 +40,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("update")]
-        public async Task<IActionResult> Update(Product product)
+        public async Task<IActionResult> Update(ProductDto product)
         {
             var Addresult = await _productService.Update(product);
             if (Addresult.IsSuccess)

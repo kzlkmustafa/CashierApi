@@ -1,9 +1,12 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using BusinessLayer.Constant;
+using CoreLayer.Entities;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +18,20 @@ namespace BusinessLayer.Concrete
     public class KdvManager : IKdvService
     {
         readonly private IKdvDal _kdvdal;
+        readonly private IMapper _mapper;
 
-        public KdvManager(IKdvDal kdvdal)
+        public KdvManager(IKdvDal kdvdal, IMapper mapper)
         {
             _kdvdal = kdvdal;
+            _mapper = mapper;
         }
 
-        public async Task<IResult> Add(Kdv entity)
+        public async Task<IResult> Add(KdvAddDto entity)
         {
+            var result = _mapper.Map<Kdv>(entity);
             try
             {
-                await _kdvdal.AddAsync(entity);
+                await _kdvdal.AddAsync(result);
                 return new Result(true, Messages.Succesfully);
 
             }
@@ -49,42 +55,12 @@ namespace BusinessLayer.Concrete
 
             }
         }
-
-        public async Task<IDataResult<Kdv>> GetById(int id)
+        public async Task<IResult> Update(KdvDto entity)
         {
+            var result = _mapper.Map<Kdv>(entity);
             try
             {
-                Kdv mykdvdetail = await _kdvdal.GetByIdAsync(x => x.KdvId == id);
-                return new DataResult<Kdv>(mykdvdetail, true);
-
-            }
-            catch (Exception ex)
-            {
-                return new DataResult<Kdv>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IDataResult<IEnumerable<Kdv>>> GetList()
-        {
-            try
-            {
-                IEnumerable<Kdv> mykdvdetail = (await _kdvdal.GetAllAsync()).ToList();
-                return new DataResult<IEnumerable<Kdv>>(mykdvdetail, true,Messages.Succesfully);
-
-            }
-            catch (Exception ex)
-            {
-                return new DataResult<IEnumerable<Kdv>>(null, false, ex.Message);
-
-            }
-        }
-
-        public async Task<IResult> Update(Kdv entity)
-        {
-            try
-            {
-                await _kdvdal.UpdateAsync(entity);
+                await _kdvdal.UpdateAsync(result);
                 return new Result(true, Messages.Succesfully);
 
             }
@@ -94,5 +70,40 @@ namespace BusinessLayer.Concrete
 
             }
         }
+
+        public async Task<IDataResult<KdvDto>> GetById(int id)
+        {
+            try
+            {
+                Kdv entity = await _kdvdal.GetByIdAsync(x => x.KdvId == id);
+                var result = _mapper.Map<KdvDto>(entity);
+                return new DataResult<KdvDto>(result, true);
+
+            }
+            catch (Exception ex)
+            {
+                return new DataResult<KdvDto>(null, false, ex.Message);
+
+            }
+        }
+
+        public async Task<IDataResult<IEnumerable<KdvDto>>> GetList()
+        {
+            try
+            {
+                IEnumerable<Kdv> entities = (await _kdvdal.GetAllAsync()).ToList();
+                var result = _mapper.Map<IEnumerable<Kdv>, IEnumerable<KdvDto>>(entities);
+
+                return new DataResult<IEnumerable<KdvDto>>(result, true,Messages.Succesfully);
+
+            }
+            catch (Exception ex)
+            {
+                return new DataResult<IEnumerable<KdvDto>>(null, false, ex.Message);
+
+            }
+        }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CoreLayer.Utilities.Results.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IBasketService : IGenericService<Basket>
+    public interface IBasketService : IGenericService<BasketDto>
     {
 
-        Task<IResult> Add(Basket basket);
-        Task<IDataResult<IEnumerable<Basket>>> GetListByCashier(int cashierId);
+        Task<IResult> Add(BasketAddDto basketaddto);
+        Task<IDataResult<IEnumerable<BasketDto>>> GetListByCashier(int cashierId);
     }
 }
     

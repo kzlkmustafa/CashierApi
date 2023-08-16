@@ -18,7 +18,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> Add(Basket basket)
+        public async Task<IActionResult> Add(BasketAddDto basket)
         {
             var result = new Basket();
             var Addresult = await _basketService.Add(basket);
@@ -41,7 +41,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("update")]
-        public async Task<IActionResult> Update(Basket basket)
+        public async Task<IActionResult> Update(BasketDto basket)
         {
             var Addresult = await _basketService.Update(basket);
             if (Addresult.IsSuccess)

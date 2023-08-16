@@ -1,5 +1,6 @@
 ﻿using CoreLayer.Utilities.Results.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IKdvService : IGenericService<Kdv>
+    public interface IKdvService : IGenericService<KdvDto>
     {
 
-        Task<IResult> Add(Kdv kdv);
+        Task<IResult> Add(KdvAddDto kdvadddto);
     }
 }
