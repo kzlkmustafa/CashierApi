@@ -55,6 +55,7 @@ namespace BusinessLayer.Concrete
             {
                 Product myEntity = await _productdal.GetByIdAsync(x => x.ProductId == id);
                 return new DataResult<Product>(myEntity, true, Messages.Succesfully);
+                new DataResult<Product>(data: myEntity, message:Messages.Succesfully, success: true);
             }
             catch (Exception ex)
             {

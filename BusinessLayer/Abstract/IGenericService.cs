@@ -11,7 +11,6 @@ namespace BusinessLayer.Abstract
     {
         Task<IDataResult<T>> GetById(int id);
         Task<IDataResult<IEnumerable<T>>> GetList();
-        Task<IResult> Add(T entity);
         Task<IResult> Update(T entity);
         Task<IResult> Delete(int id);
     }

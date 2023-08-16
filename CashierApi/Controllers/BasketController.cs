@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.Concrete.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace CashierApi.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> Add(Basket basket)
         {
+            var result = new Basket();
             var Addresult = await _basketService.Add(basket);
             if (Addresult.IsSuccess)
             {

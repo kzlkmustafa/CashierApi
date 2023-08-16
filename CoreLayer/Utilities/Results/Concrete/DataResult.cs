@@ -17,9 +17,6 @@ namespace CoreLayer.Utilities.Results.Concrete
         {
             Data = data;
         }
-        public bool IsSuccess { get; }
-
-        public string MyMessage { get; }
         public T Data { get; }
     }
 }

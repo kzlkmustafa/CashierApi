@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString: "");
+            optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb;Database=CashierAppDb;Trusted_Connection=true");
         }
         DbSet<AppUser> AppUsers { get; set; }
         DbSet<Basket> Baskets { get; set; }

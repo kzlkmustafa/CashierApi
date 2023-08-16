@@ -53,6 +53,7 @@ namespace CashierApi.Controllers
         public async Task<IActionResult> GetByIdProduct(int productid)
         {
             var Addresult = await _productService.GetById(productid);
+
             if (Addresult.IsSuccess)
             {
                 return Ok(Addresult.Data);

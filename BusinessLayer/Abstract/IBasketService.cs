@@ -10,6 +10,8 @@ namespace BusinessLayer.Abstract
 {
     public interface IBasketService : IGenericService<Basket>
     {
+
+        Task<IResult> Add(Basket basket);
         Task<IDataResult<IEnumerable<Basket>>> GetListByCashier(int cashierId);
     }
 }
