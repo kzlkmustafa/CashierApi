@@ -21,8 +21,8 @@ namespace BusinessLayer.DependencyResolves.Autofac
             builder.RegisterType<BasketDetailManager>().As<IBasketDetailService>();
             builder.RegisterType<EfBasketDetailDal>().As<IBasketDetailDal>();
 
-            builder.RegisterType<CashierManager>().As<ICashierService>();
-            builder.RegisterType<EfCashierDal>().As<ICashierDal>();
+            builder.RegisterType<AppUserManager>().As<IAppUserService>();
+            builder.RegisterType<EfAppUserDal>().As<IAppUserDal>();
 
             builder.RegisterType<KdvManager>().As<IKdvService>();
             builder.RegisterType<EfKdvDal>().As<IKdvDal>();

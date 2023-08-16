@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class CashierManager : ICashierService
+    public class AppUserManager : IAppUserService
     {
     }
 }

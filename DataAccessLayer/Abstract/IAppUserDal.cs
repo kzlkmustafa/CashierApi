@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface ICashierDal : IEntityRepository<Cashier>
+    public interface IAppUserDal : IEntityRepository<AppUser>
     {
     }
 }

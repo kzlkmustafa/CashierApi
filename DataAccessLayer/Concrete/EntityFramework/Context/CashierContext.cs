@@ -14,7 +14,7 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
         {
             optionsBuilder.UseSqlServer(connectionString: "");
         }
-        DbSet<Cashier> Cashiers { get; set; }
+        DbSet<AppUser> AppUsers { get; set; }
         DbSet<Basket> Baskets { get; set; }
         DbSet<BasketDetail> BasketDetails { get; set; }
         DbSet<Product> Products { get; set; }
@@ -46,11 +46,11 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
                 .HasForeignKey(z => z.ProductId);
 
             modelBuilder.Entity<Basket>()
-                .HasOne(x => x.Cashier)
+                .HasOne(x => x.AppUser)
                 .WithMany(y => y.Basket)
-                .HasForeignKey(z => z.CashierId);
+                .HasForeignKey(z => z.AppUserId);
 
-            modelBuilder.Entity<Cashier>(x =>
+            modelBuilder.Entity<AppUser>(x =>
             {
                 x.Property(y => y.UserName)
                 .HasMaxLength(50)
@@ -59,9 +59,12 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
                 x.Property(y => y.NameSurname)
                 .HasMaxLength(100);
 
-                x.Property(y => y.CashierPassword)
-                .HasMaxLength(50)
+                x.Property(y => y.PasswordHash)
                 .IsRequired(true);
+                
+                x.Property(y => y.PasswordSalt)
+                .IsRequired(true);
+
 
                 x.Property(y => y.Email)
                 .HasMaxLength(100)

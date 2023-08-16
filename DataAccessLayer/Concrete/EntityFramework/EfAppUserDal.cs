@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete.EntityFramework
 {
-    public class EfCashierDal : EfEntityRepositoryBase<Cashier,CashierContext> , ICashierDal
+    public class EfAppUserDal : EfEntityRepositoryBase<AppUser, CashierContext> , IAppUserDal
     {
     }
 }

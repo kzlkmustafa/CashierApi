@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Cashier : IEntity
+    public class AppUser : IEntity
     {
         [Key]
-        public int CashierId { get; set; }
+        public int AppUserId { get; set; }
         public string UserName { get; set; }
         public string NameSurname { get;set; }
-        public string CashierPassword { get;set; }
+        public byte[] PasswordHash { get;set; }
+        public byte[] PasswordSalt { get;set; }
+        public bool Status { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }
         public DateTime CreateDate { get; set; }

@@ -17,8 +17,8 @@ namespace EntityLayer.Concrete
         public bool Status { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public int CashierId { get; set; }
-        public Cashier Cashier { get; set; }
+        public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
 
         public List<BasketDetail> BasketDetails { get; set; }
 
