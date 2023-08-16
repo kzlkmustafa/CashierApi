@@ -78,7 +78,7 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public async Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyBasket(int basketId)
+        public async Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyBasketId(int basketId)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public async Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyProduct(int productId)
+        public async Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyProductId(int productId)
         {
             try
             {

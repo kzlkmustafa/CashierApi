@@ -91,7 +91,7 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public async Task<IDataResult<IEnumerable<Product>>> GetListByKdv(int kdvId)
+        public async Task<IDataResult<IEnumerable<Product>>> GetListByKdvId(int kdvId)
         {
             try
             {

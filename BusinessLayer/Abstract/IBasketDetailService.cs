@@ -11,7 +11,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IBasketDetailService : IGenericService<BasketDetail>
     {
-        Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyBasket(int basketId);
-        Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyProduct(int productId);
+        Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyBasketId(int basketId);
+        Task<IDataResult<IEnumerable<BasketDetail>>> GetListbyProductId(int productId);
     }
 }
