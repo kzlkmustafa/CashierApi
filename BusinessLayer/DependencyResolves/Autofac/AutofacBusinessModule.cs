@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using BusinessLayer.Security.jwt;
+using CoreLayer.Utilities.Security.jwt;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFramework;
 using System;
@@ -32,6 +34,11 @@ namespace BusinessLayer.DependencyResolves.Autofac
 
             builder.RegisterType<BasketManager>().As<IBasketService>();
             builder.RegisterType<EfBasketDal>().As<IBasketDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
 
         }
     }
