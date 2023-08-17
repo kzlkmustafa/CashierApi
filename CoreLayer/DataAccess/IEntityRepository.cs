@@ -10,7 +10,7 @@ namespace CoreLayer.DataAccess
 {
     public interface IEntityRepository<TEntity> where TEntity : class , IEntity, new()
     {
-        Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> filter);
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter);
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null);
         Task AddAsync(TEntity entity);
         Task DeleteAsync(int id);

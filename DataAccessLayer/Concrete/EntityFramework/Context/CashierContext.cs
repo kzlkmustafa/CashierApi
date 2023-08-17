@@ -14,14 +14,14 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
         {
             optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb;Database=CashierAppDb;Trusted_Connection=true");
         }
-        DbSet<AppUser> AppUsers { get; set; }
-        DbSet<Basket> Baskets { get; set; }
-        DbSet<BasketDetail> BasketDetails { get; set; }
-        DbSet<Product> Products { get; set; }
-        DbSet<Category> Categories { get; set; }
-        DbSet<Kdv> Kdvs { get; set; }
-        DbSet<UserOperationClaim> UserOperationClaims { get; set; }
-        DbSet<OperationClaim> OpertaionClaims { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketDetail> BasketDetails { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Kdv> Kdvs { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

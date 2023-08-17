@@ -74,7 +74,7 @@ namespace BusinessLayer.Concrete
         {
             try
             {
-                Product entity = await _productdal.GetByIdAsync(x => x.ProductId == id);
+                Product entity = await _productdal.GetAsync(x => x.ProductId == id);
                 var result = _mapper.Map<ProductDto>(entity);
                 return new DataResult<ProductDto>(result, true, Messages.Succesfully);
             }

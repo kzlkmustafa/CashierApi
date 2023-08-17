@@ -1,4 +1,5 @@
 ﻿using CoreLayer.DataAccess;
+using CoreLayer.Entities;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IAppUserDal : IEntityRepository<AppUser>
     {
+        Task<IEnumerable<OperationClaim>> GetClaimsAsync(int id);
     }
 }

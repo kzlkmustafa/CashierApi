@@ -49,7 +49,7 @@ namespace CoreLayer.DataAccess.EntityFramework
             }
         }
 
-        public async Task<Tentity> GetByIdAsync(Expression<Func<Tentity, bool>> filter)
+        public async Task<Tentity> GetAsync(Expression<Func<Tentity, bool>> filter)
         {
             using(var context = new TContext())
             {

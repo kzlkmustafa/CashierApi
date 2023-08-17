@@ -38,6 +38,8 @@ namespace BusinessLayer.Mapper.AutoMapper
             CreateMap<Kdv, KdvDto>();
             CreateMap<KdvDto, Kdv>();
 
+            CreateMap<AppUser,AppUserDto>();
+            CreateMap<AppUserDto, AppUser>();
         }
     }
 }

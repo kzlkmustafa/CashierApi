@@ -75,7 +75,7 @@ namespace BusinessLayer.Concrete
         {
             try
             {
-                BasketDetail entity = await _basketdetaildal.GetByIdAsync(x => x.BasketDetailId == id);
+                BasketDetail entity = await _basketdetaildal.GetAsync(x => x.BasketDetailId == id);
                 var result = _mapper.Map<BasketDetailDto>(entity);
 
                 return new DataResult<BasketDetailDto>(result, true,Messages.Succesfully);

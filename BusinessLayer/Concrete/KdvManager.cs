@@ -75,7 +75,7 @@ namespace BusinessLayer.Concrete
         {
             try
             {
-                Kdv entity = await _kdvdal.GetByIdAsync(x => x.KdvId == id);
+                Kdv entity = await _kdvdal.GetAsync(x => x.KdvId == id);
                 var result = _mapper.Map<KdvDto>(entity);
                 return new DataResult<KdvDto>(result, true);
 

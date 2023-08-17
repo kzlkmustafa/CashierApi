@@ -75,7 +75,7 @@ namespace BusinessLayer.Concrete
         {
             try
             {
-                Category entity = await _categorydal.GetByIdAsync(x => x.CategoryId == id);
+                Category entity = await _categorydal.GetAsync(x => x.CategoryId == id);
                 var result = _mapper.Map<CategoryDto>(entity);
                 return new DataResult<CategoryDto>(result, true,Messages.Succesfully);
 
