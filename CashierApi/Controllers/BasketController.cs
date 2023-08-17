@@ -1,8 +1,10 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using EntityLayer.Concrete.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace CashierApi.Controllers
 {
@@ -18,6 +20,8 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Add(BasketAddDto basket)
         {
             var result = new Basket();
@@ -30,6 +34,8 @@ namespace CashierApi.Controllers
         }
 
         [HttpDelete("delete")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Delete(int basketid)
         {
             var Addresult = await _basketService.Delete(basketid);
@@ -41,6 +47,8 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("update")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Update(BasketDto basket)
         {
             var Addresult = await _basketService.Update(basket);
@@ -52,6 +60,8 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getbyid")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetById(int basketid)
         {
             var Addresult = await _basketService.GetById(basketid);
@@ -62,7 +72,8 @@ namespace CashierApi.Controllers
             return BadRequest(Addresult.MyMessage);
         }
         [HttpGet("getall")]
-        //[Authorize(Roles = "Product.List")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetList()
         {
             var result = await _basketService.GetList();
@@ -73,6 +84,8 @@ namespace CashierApi.Controllers
             return BadRequest(result.MyMessage);
         }
         [HttpGet("getlistbycashierid")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetBasketsByCashierId(int cashierid)
         {
             var result = await _basketService.GetListByCashier(cashierid);

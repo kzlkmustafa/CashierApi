@@ -19,6 +19,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> AddProduct(ProductAddDto product)
         {
             var Addresult = await _productService.Add(product);
@@ -29,6 +30,7 @@ namespace CashierApi.Controllers
             return BadRequest(Addresult.MyMessage);
         }
         [HttpDelete("delete")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteProduct(int productid)
         {
             var Addresult = await _productService.Delete(productid);
@@ -40,6 +42,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("update")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Update(ProductDto product)
         {
             var Addresult = await _productService.Update(product);
@@ -51,6 +54,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getbyid")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetByIdProduct(int productid)
         {
             var Addresult = await _productService.GetById(productid);
@@ -62,7 +66,7 @@ namespace CashierApi.Controllers
             return BadRequest(Addresult.MyMessage);
         }
         [HttpGet("getall")]
-        //[Authorize(Roles = "Product.List")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetListProduct()
         {
             var result = await _productService.GetList();
@@ -74,6 +78,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getlistbycategoryid")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetProductsByCategoryId(int categoryid)
         {
             var Addresult = await _productService.GetListByCategoryId(categoryid);
@@ -85,6 +90,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getlistbykdvid")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetProductsByKdvId(int kdvid)
         {
             var Addresult = await _productService.GetListByKdvId(kdvid);

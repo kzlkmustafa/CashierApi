@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using EntityLayer.Concrete.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace CashierApi.Controllers
 {
@@ -18,6 +20,8 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Add(BasketDetailAddDto basketDetail)
         {
             var Addresult = await _basketDetailService.Add(basketDetail);
@@ -29,6 +33,8 @@ namespace CashierApi.Controllers
         }
 
         [HttpDelete("delete")]
+
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Delete(int basketDetailid)
         {
             var Addresult = await _basketDetailService.Delete(basketDetailid);
@@ -40,6 +46,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("update")]
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Update(BasketDetailDto basketDetail)
         {
             var Addresult = await _basketDetailService.Update(basketDetail);
@@ -51,6 +58,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getbyid")]
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetById(int basketDetailid)
         {
             var Addresult = await _basketDetailService.GetById(basketDetailid);
@@ -62,6 +70,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getall")]
+        [Authorize(Roles = "Cashier,Manager")]
         //[Authorize(Roles = "Product.List")]
         public async Task<IActionResult> GetList()
         {
@@ -74,6 +83,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getlistbycategoryid")]
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetBasketDetailsByBasketId(int basketid)
         {
             var Addresult = await _basketDetailService.GetListbyBasketId(basketid);
@@ -85,6 +95,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getlistbykdvid")]
+        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetBasketDetailsbyProductId(int productid)
         {
             var Addresult = await _basketDetailService.GetListbyProductId(productid);

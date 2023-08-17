@@ -1,8 +1,10 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using EntityLayer.Concrete.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace CashierApi.Controllers
 {
@@ -18,6 +20,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Add(CategoryAddDto category)
         {
             var Addresult = await _categoryService.Add(category);
@@ -29,6 +32,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpDelete("delete")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int categoryid)
         {
             var Addresult = await _categoryService.Delete(categoryid);
@@ -40,6 +44,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("update")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Update(CategoryDto category)
         {
             var Addresult = await _categoryService.Update(category);
@@ -51,6 +56,7 @@ namespace CashierApi.Controllers
         }
 
         [HttpGet("getbyid")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetById(int categoryid)
         {
             var Addresult = await _categoryService.GetById(categoryid);
@@ -61,7 +67,7 @@ namespace CashierApi.Controllers
             return BadRequest(Addresult.MyMessage);
         }
         [HttpGet("getall")]
-        //[Authorize(Roles = "Product.List")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetList()
         {
             var result = await _categoryService.GetList();
