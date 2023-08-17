@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    internal interface IAppUserService : IGenericService<AppUserDto>
+    public interface IAppUserService : IGenericService<AppUserDto>
     {
+        Task<IResult> Add(AppUser appUser);
         Task<IDataResult<IEnumerable<OperationClaim>>> GetClaims(int userid);
-        Task<IDataResult<AppUserDto>> GetByMail(string mail);
+        Task<IDataResult<AppUser>> GetByMail(string mail);
     }
 }

@@ -12,7 +12,7 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int OperationClaimId { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public List<UserOperationClaim> UserOperationClaims { get; set; }
     }

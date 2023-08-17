@@ -25,6 +25,19 @@ namespace BusinessLayer.Concrete
             _appuserdal = appuserdal;
             _mapper = mapper;
         }
+        public async Task<IResult> Add(AppUser appUser)
+        {
+            try
+            {
+                await _appuserdal.AddAsync(appUser);
+                return new Result(true, Messages.Succesfully);
+
+            }
+            catch (Exception ex)
+            {
+                return new Result(false, ex.Message);
+            }
+        }
 
         public async Task<IResult> Delete(int id)
         {
@@ -97,18 +110,18 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public async Task<IDataResult<AppUserDto>> GetByMail(string mail)
+        public async Task<IDataResult<AppUser>> GetByMail(string mail)
         {
             try
             {
                 AppUser entity = await _appuserdal.GetAsync(x => x.Email == mail);
-                var result = _mapper.Map<AppUserDto>(entity);
+                var result = _mapper.Map<AppUser>(entity);
 
-                return new DataResult<AppUserDto>(result, true, Messages.Succesfully);
+                return new DataResult<AppUser>(result, true, Messages.Succesfully);
             }
             catch (Exception ex)
             {
-                return new DataResult<AppUserDto>(null, false, ex.Message);
+                return new DataResult<AppUser>(null, false, ex.Message);
 
             }
         }

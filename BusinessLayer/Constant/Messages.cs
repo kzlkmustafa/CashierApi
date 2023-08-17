@@ -10,5 +10,7 @@ namespace BusinessLayer.Constant
     {
         public static string Succesfully = "Succesfully";
         public static string NotFound = "Not Found";
+        public static string Wrong = "Wrong!!";
+
     }
 }
