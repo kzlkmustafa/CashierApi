@@ -20,6 +20,8 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
         DbSet<Product> Products { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Kdv> Kdvs { get; set; }
+        DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        DbSet<OperationClaim> OpertaionClaims { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,8 +49,18 @@ namespace DataAccessLayer.Concrete.EntityFramework.Context
 
             modelBuilder.Entity<Basket>()
                 .HasOne(x => x.AppUser)
-                .WithMany(y => y.Basket)
+                .WithMany(y => y.Baskets)
                 .HasForeignKey(z => z.AppUserId);
+
+            modelBuilder.Entity<UserOperationClaim>()
+                .HasOne(x => x.AppUser)
+                .WithMany(y => y.UserOperationClaims)
+                .HasForeignKey(z => z.AppUserId);
+
+            modelBuilder.Entity<UserOperationClaim>()
+                .HasOne(x => x.OperationClaim)
+                .WithMany(y => y.UserOperationClaims)
+                .HasForeignKey(z => z.OperationClaimId);
 
             modelBuilder.Entity<AppUser>(x =>
             {

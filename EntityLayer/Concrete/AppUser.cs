@@ -23,7 +23,8 @@ namespace EntityLayer.Concrete
         public DateTime Birthdate { get; set; }
         public string Telnr { get; set; }
 
-        public List<Basket> Basket { get; set; }
+        public List<Basket> Baskets { get; set; }
+        public List<UserOperationClaim> UserOperationClaims { get; set; }
 
     }
 }
