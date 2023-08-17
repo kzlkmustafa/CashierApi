@@ -12,7 +12,7 @@ namespace BusinessLayer.Abstract
     public interface IAppUserService : IGenericService<AppUserDto>
     {
         Task<IResult> Add(AppUser appUser);
-        Task<IDataResult<IEnumerable<OperationClaim>>> GetClaims(int userid);
+        Task<IDataResult<IEnumerable<OperationClaim>>> GetClaims(AppUser user);
         Task<IDataResult<AppUser>> GetByMail(string mail);
     }
 }

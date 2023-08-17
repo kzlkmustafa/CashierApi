@@ -27,7 +27,7 @@ namespace BusinessLayer.Concrete
 
         public async Task<IDataResult<AccessToken>> CreateAccessToken(AppUser appuser)
         {
-            var claims = await _userservice.GetClaims(appuser.AppUserId);
+            var claims = await _userservice.GetClaims(appuser);
             var accesstoken = await _tokenhelper.CreateToken(appuser, claims.Data);
             return new DataResult<AccessToken>(accesstoken,true, Messages.Succesfully);
 
@@ -71,11 +71,12 @@ namespace BusinessLayer.Concrete
 
         public async Task<IResult> USerExist(string mail)
         {
-            if ( await _userservice.GetByMail(mail) != null)
+            if ( await _userservice.GetByMail(mail) == null)
             {
-                return new Result(false,Messages.NotFound);
+                return new Result(true, Messages.Succesfully);
+                
             }
-            return new Result(true, Messages.Succesfully);
+            return new Result(false, Messages.Already);
         }
     }
 }

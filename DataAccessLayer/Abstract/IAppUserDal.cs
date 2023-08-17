@@ -11,6 +11,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IAppUserDal : IEntityRepository<AppUser>
     {
-        Task<IEnumerable<OperationClaim>> GetClaimsAsync(int id);
+        Task<IEnumerable<OperationClaim>> GetClaimsAsync(AppUser user);
     }
 }

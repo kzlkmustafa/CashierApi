@@ -20,8 +20,6 @@ namespace CashierApi.Controllers
         }
 
         [HttpPost("add")]
-
-        [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Add(BasketAddDto basket)
         {
             var result = new Basket();
@@ -34,7 +32,6 @@ namespace CashierApi.Controllers
         }
 
         [HttpDelete("delete")]
-
         [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> Delete(int basketid)
         {

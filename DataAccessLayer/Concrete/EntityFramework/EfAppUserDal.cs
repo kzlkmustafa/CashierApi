@@ -13,14 +13,14 @@ namespace DataAccessLayer.Concrete.EntityFramework
 {
     public class EfAppUserDal : EfEntityRepositoryBase<AppUser, CashierContext>, IAppUserDal
     {
-        public async Task<IEnumerable<OperationClaim>> GetClaimsAsync(int id)
+        public async Task<IEnumerable<OperationClaim>> GetClaimsAsync(AppUser user)
         {
             using(CashierContext context = new CashierContext())
             {
                 var result = from operationClaim in context.OperationClaims
                              join useroperationclaim in context.UserOperationClaims
                              on operationClaim.OperationClaimId equals useroperationclaim.OperationClaimId
-                             where useroperationclaim.AppUserId == id
+                             where useroperationclaim.AppUserId == user.AppUserId
                              select new OperationClaim { OperationClaimId = operationClaim.OperationClaimId, Name = operationClaim.Name };
                 IEnumerable<OperationClaim> claims = await result.ToListAsync();
                 return claims;

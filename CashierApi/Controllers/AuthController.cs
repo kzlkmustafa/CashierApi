@@ -34,17 +34,21 @@ namespace CashierApi.Controllers
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
             var userExist = await _authService.USerExist(registerDto.Email);
-            if (!userExist.IsSuccess)
+            if (userExist.IsSuccess == false)
             {
                 return BadRequest(userExist.MyMessage);
             }
-            var registerResult = await _authService.Register(registerDto);
-            var result = await _authService.CreateAccessToken(registerResult.Data);
-            if (result.IsSuccess)
+            else
             {
-                return Ok(result.Data);
+                var registerResult = await _authService.Register(registerDto);
+                var result = await _authService.CreateAccessToken(registerResult.Data);
+                if (result.IsSuccess)
+                {
+                    return Ok(result.Data);
+                }
+                return BadRequest(result.MyMessage);
             }
-            return BadRequest(result.MyMessage);
+            
         }
     }
 }

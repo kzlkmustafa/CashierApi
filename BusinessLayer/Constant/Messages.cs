@@ -11,6 +11,7 @@ namespace BusinessLayer.Constant
         public static string Succesfully = "Succesfully";
         public static string NotFound = "Not Found";
         public static string Wrong = "Wrong!!";
+        public static string Already = "user already exists!!";
 
     }
 }

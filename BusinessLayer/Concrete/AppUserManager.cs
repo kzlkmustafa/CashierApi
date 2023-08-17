@@ -81,11 +81,11 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public async Task<IDataResult<IEnumerable<OperationClaim>>> GetClaims(int userid)
+        public async Task<IDataResult<IEnumerable<OperationClaim>>> GetClaims(AppUser user)
         {
             try
             {
-                IEnumerable<OperationClaim> entity = (await _appuserdal.GetClaimsAsync(userid)).ToList();
+                IEnumerable<OperationClaim> entity = (await _appuserdal.GetClaimsAsync(user)).ToList();
                 return new DataResult<IEnumerable<OperationClaim>>(entity, true, Messages.Succesfully);
             }
             catch (Exception ex)

@@ -82,7 +82,7 @@ namespace CashierApi.Controllers
             return BadRequest(result.MyMessage);
         }
 
-        [HttpGet("getlistbycategoryid")]
+        [HttpGet("getlistbybasketid")]
         [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetBasketDetailsByBasketId(int basketid)
         {
@@ -94,7 +94,7 @@ namespace CashierApi.Controllers
             return BadRequest(Addresult.MyMessage);
         }
 
-        [HttpGet("getlistbykdvid")]
+        [HttpGet("getlistbyproductid")]
         [Authorize(Roles = "Cashier,Manager")]
         public async Task<IActionResult> GetBasketDetailsbyProductId(int productid)
         {
